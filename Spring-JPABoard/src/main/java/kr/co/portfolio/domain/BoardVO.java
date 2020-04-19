@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -38,6 +39,9 @@ public class BoardVO {
 	private String content;
 	@Column(name="writer", nullable = false)
 	private String writer;
+	@Column(name="cnt", nullable = false)
+	@ColumnDefault(value = "0")
+	private Long cnt;
 	@Column(name="createdAt", nullable = false)
 	@CreationTimestamp
 	private Timestamp createdAt;

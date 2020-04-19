@@ -46,12 +46,12 @@ public class AdminMemberController {
 	}
 	
 	@PostMapping(value="/modify")
-	public String ModiifyDo() {
+	public String ModiifyDo(@ModelAttribute("user")UserVO user, RedirectAttributes flash) {
 		return "";
 	}
 	
 	@GetMapping(value="/view")
-	public String ViewPage() {
+	public String ViewPage(@RequestParam(name="userIdx", required = false)Long idx, RedirectAttributes flash) {
 		return "";
 	}
 	

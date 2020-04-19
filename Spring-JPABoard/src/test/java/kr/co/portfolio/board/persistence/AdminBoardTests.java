@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import kr.co.portfolio.admin.persistence.BoardCustomCrudAdminRepository;
 import kr.co.portfolio.domain.BoardVO;
 import kr.co.portfolio.persistence.BoardCustomCrudRepository;
 import kr.co.portfoliokr.page.PageMaker;
@@ -22,7 +23,8 @@ import lombok.extern.java.Log;
 public class AdminBoardTests {
 
 	@Autowired
-	private BoardCustomCrudRepository repo;
+	private BoardCustomCrudAdminRepository repo;
+	
 	
 	@Test
 	public void MainTests() {
@@ -70,12 +72,34 @@ public class AdminBoardTests {
 	}
 	
 	@Test
+	public void UpdateCntTests() {
+		log.info("Update Cnt Tests");
+		repo.viewCntup(1L);
+		BoardVO board = repo.findById(1L).get();
+		log.info("Board :" + board.toString());
+	}
+	
+	@Test
 	public void ModifyTests() {
 		log.info("Modify Tests");
+		BoardVO board = repo.findById(10L).get();
+		board.setTitle("Test Modify");
+		repo.save(board);
+		board = repo.findById(10L).get();
+		log.info("Modify : " + board);
 	}
 	
 	@Test
 	public void DeleteTests() {
 		log.info("Delete Tests");
+		repo.deleteById(101L);
+		try {
+			BoardVO board = repo.findById(101L).get();
+			log.info("Delete Board Failed : " + board);
+		}catch (Exception e) {
+			// TODO: handle exception
+			log.info("Board Delete Done ");
+		}
+		
 	}
 }

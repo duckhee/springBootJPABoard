@@ -77,10 +77,6 @@ public class BoardCustomCrudAdminRepositoryImpl extends QuerydslRepositorySuppor
 		return new PageImpl<>(resultList, page, total);
 	}
 
-	@Override
-	public BoardVO viewCntup(Long bno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
